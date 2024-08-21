@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		116CF5762C76748100847982 /* DogAPIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5752C76748100847982 /* DogAPIDemoApp.swift */; };
-		116CF5782C76748100847982 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5772C76748100847982 /* ContentView.swift */; };
 		116CF57A2C76748300847982 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116CF5792C76748300847982 /* Assets.xcassets */; };
 		116CF57D2C76748300847982 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116CF57C2C76748300847982 /* Preview Assets.xcassets */; };
 		116CF5872C76748300847982 /* DogAPIDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5862C76748300847982 /* DogAPIDemoTests.swift */; };
@@ -20,6 +19,7 @@
 		116CF5AA2C76758F00847982 /* DogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5A92C76758F00847982 /* DogAPIService.swift */; };
 		116CF5AC2C7675BA00847982 /* DogBreedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AB2C7675BA00847982 /* DogBreedImage.swift */; };
 		116CF5AE2C76760F00847982 /* DogBreedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */; };
+		116CF5B02C76776B00847982 /* DogBreedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AF2C76776B00847982 /* DogBreedListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,6 @@
 /* Begin PBXFileReference section */
 		116CF5722C76748100847982 /* DogAPIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogAPIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116CF5752C76748100847982 /* DogAPIDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIDemoApp.swift; sourceTree = "<group>"; };
-		116CF5772C76748100847982 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		116CF5792C76748300847982 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		116CF57C2C76748300847982 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		116CF5822C76748300847982 /* DogAPIDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogAPIDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +55,7 @@
 		116CF5A92C76758F00847982 /* DogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIService.swift; sourceTree = "<group>"; };
 		116CF5AB2C7675BA00847982 /* DogBreedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedImage.swift; sourceTree = "<group>"; };
 		116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListViewModel.swift; sourceTree = "<group>"; };
+		116CF5AF2C76776B00847982 /* DogBreedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +153,7 @@
 		116CF5A02C7674AC00847982 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				116CF5772C76748100847982 /* ContentView.swift */,
+				116CF5AF2C76776B00847982 /* DogBreedListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,7 +313,7 @@
 				116CF5AC2C7675BA00847982 /* DogBreedImage.swift in Sources */,
 				116CF5A42C76750600847982 /* DogAPIEndPoint.swift in Sources */,
 				116CF5A62C76753300847982 /* DogBreed.swift in Sources */,
-				116CF5782C76748100847982 /* ContentView.swift in Sources */,
+				116CF5B02C76776B00847982 /* DogBreedListView.swift in Sources */,
 				116CF5762C76748100847982 /* DogAPIDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
