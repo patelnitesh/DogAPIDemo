@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+/// Show list of dog breed and subbreed
+
 struct DogBreedListView: View {
+   
     private var viewModel = DogBreedListViewModel(dogAPIService: DogAPIService.shared)
+    
     @State var searchText: String = ""
     
     var body: some View {
@@ -47,6 +51,9 @@ struct DogBreedListView: View {
                     }
                 }
                 .navigationTitle("Dog Breeds")
+                .navigationDestination(for: DogBreed.self) { dogBreed in
+                    DogBreedDetailsView(dogBreed: dogBreed)
+                }
             }
         }
     }
