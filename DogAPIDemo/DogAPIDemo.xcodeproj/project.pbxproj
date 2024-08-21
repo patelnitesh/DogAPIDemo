@@ -28,6 +28,7 @@
 		116CF5BF2C7681C400847982 /* MockDogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5BE2C7681C400847982 /* MockDogAPIService.swift */; };
 		116CF5C12C76822800847982 /* DogBreedListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5C02C76822800847982 /* DogBreedListViewModelTests.swift */; };
 		116CF5C32C76823700847982 /* DogBreedDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5C22C76823700847982 /* DogBreedDetailsViewModelTests.swift */; };
+		116CF5C52C7688BF00847982 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116CF5C42C7688BF00847982 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		116CF5BE2C7681C400847982 /* MockDogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDogAPIService.swift; sourceTree = "<group>"; };
 		116CF5C02C76822800847982 /* DogBreedListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListViewModelTests.swift; sourceTree = "<group>"; };
 		116CF5C22C76823700847982 /* DogBreedDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		116CF5C42C7688BF00847982 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		116CF5692C76748000847982 = {
 			isa = PBXGroup;
 			children = (
+				116CF5C42C7688BF00847982 /* Launch Screen.storyboard */,
 				116CF5742C76748100847982 /* DogAPIDemo */,
 				116CF5852C76748300847982 /* DogAPIDemoTests */,
 				116CF58F2C76748300847982 /* DogAPIDemoUITests */,
@@ -329,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116CF5C52C7688BF00847982 /* Launch Screen.storyboard in Resources */,
 				116CF57D2C76748300847982 /* Preview Assets.xcassets in Resources */,
 				116CF57A2C76748300847982 /* Assets.xcassets in Resources */,
 			);
@@ -531,6 +535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DogAPIDemo/Preview Content\"";
@@ -539,6 +544,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,6 +565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DogAPIDemo/Preview Content\"";
@@ -567,6 +574,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
