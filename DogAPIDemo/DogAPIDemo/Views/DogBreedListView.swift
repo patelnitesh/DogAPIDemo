@@ -22,8 +22,27 @@ struct DogBreedListView: View {
             NavigationStack {
                 List {
                     ForEach(viewModel.dogBreeds) { breed in
-                        NavigationLink(value: breed) {
-                            Text(breed.displayname)
+                        if let subBreeds = breed.subBreeds, !subBreeds.isEmpty {
+                            // Show expandable list for breeds with sub-breeds
+                            DisclosureGroup {
+                                ForEach(subBreeds) { subBreed in
+                                    NavigationLink(value: subBreed) {
+                                        Text(subBreed.displayname)
+                                    }
+                                }
+                            } label: {
+                                HStack {
+                                    Text(breed.displayname)
+                                    Text("(\(subBreeds.count))")
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                        }
+                        else {
+                            // Show detail view for breeds without sub-breeds
+                            NavigationLink(value: breed) {
+                                Text(breed.displayname)
+                            }
                         }
                     }
                 }
