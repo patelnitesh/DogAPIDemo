@@ -12,6 +12,8 @@ import SwiftUI
 ///
 struct DogBreedDetailsView: View {
     private var viewModel: DogBreedDetailsViewModel
+    @State private var currentImage: String = ""
+
     init(dogBreed: DogBreed) {
         viewModel = DogBreedDetailsViewModel(dogBreed: dogBreed, dogAPIService: DogAPIService.shared)
     }
@@ -31,23 +33,11 @@ struct DogBreedDetailsView: View {
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                TabView() {
-                    ForEach(viewModel.breedImages, id: \.self) { breedImage in
-                        AsyncImage(url: URL(string: breedImage.imageUrl)) { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .id(breedImage.id)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .padding()
-                        .tag(breedImage.id)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
+                DogBreedImageGalleryView(breedImages: viewModel.breedImages, currentImage: $currentImage)
             }
         }
-        .navigationTitle(viewModel.dogBreed.displayname)
+        .navigationTitle(viewModel.displayName)
+        
     }
 }
 

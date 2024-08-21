@@ -23,7 +23,7 @@ struct DogBreed: Identifiable, Hashable {
         }
     }
     
-    var displayname: String {
+    var displayName: String {
         name.capitalized
     }
 }
