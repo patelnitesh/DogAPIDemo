@@ -21,6 +21,7 @@
 		116CF5AE2C76760F00847982 /* DogBreedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */; };
 		116CF5B02C76776B00847982 /* DogBreedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AF2C76776B00847982 /* DogBreedListView.swift */; };
 		116CF5B22C76791900847982 /* DogBreedDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5B12C76791900847982 /* DogBreedDetailsView.swift */; };
+		116CF5B42C767A9A00847982 /* DogBreedDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5B32C767A9A00847982 /* DogBreedDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListViewModel.swift; sourceTree = "<group>"; };
 		116CF5AF2C76776B00847982 /* DogBreedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListView.swift; sourceTree = "<group>"; };
 		116CF5B12C76791900847982 /* DogBreedDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedDetailsView.swift; sourceTree = "<group>"; };
+		116CF5B32C767A9A00847982 /* DogBreedDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */,
+				116CF5B32C767A9A00847982 /* DogBreedDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				116CF5AA2C76758F00847982 /* DogAPIService.swift in Sources */,
 				116CF5AE2C76760F00847982 /* DogBreedListViewModel.swift in Sources */,
 				116CF5AC2C7675BA00847982 /* DogBreedImage.swift in Sources */,
+				116CF5B42C767A9A00847982 /* DogBreedDetailsViewModel.swift in Sources */,
 				116CF5A42C76750600847982 /* DogAPIEndPoint.swift in Sources */,
 				116CF5A62C76753300847982 /* DogBreed.swift in Sources */,
 				116CF5B02C76776B00847982 /* DogBreedListView.swift in Sources */,
