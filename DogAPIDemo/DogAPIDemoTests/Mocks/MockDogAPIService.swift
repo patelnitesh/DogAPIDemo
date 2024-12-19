@@ -12,7 +12,7 @@ class MockDogAPIService: DogAPIServiceProtocol {
     var fetchDogBreedsCalled = false
     var fetchBreedImagesCalled = false
     var shouldReturnError = false
-    var mockImages: [DogBreedImage] = []
+    var mockImages: [BreedImage] = []
 
     func fetchDogBreeds() async throws -> DogBreedResponse {
         fetchDogBreedsCalled = true
@@ -31,7 +31,7 @@ class MockDogAPIService: DogAPIServiceProtocol {
         return mockResponse
     }
     
-    func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [DogBreedImage] {
+    func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [BreedImage] {
         fetchBreedImagesCalled = true
         // Return a mock list of image URLs
         
@@ -41,9 +41,9 @@ class MockDogAPIService: DogAPIServiceProtocol {
         }
         
         let tempImages = [
-            DogBreedImage(imageUrl: "https://example.com/image1.jpg"),
-            DogBreedImage(imageUrl: "https://example.com/image2.jpg"),
-            DogBreedImage(imageUrl: "https://example.com/image3.jpg")
+            BreedImage(imageUrl: "https://example.com/image1.jpg"),
+            BreedImage(imageUrl: "https://example.com/image2.jpg"),
+            BreedImage(imageUrl: "https://example.com/image3.jpg")
         ]
         
         return mockImages.isEmpty ?  tempImages : mockImages

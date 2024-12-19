@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DogBreedImage: Identifiable, Hashable {
+struct BreedImage: Identifiable, Hashable {
     let id = UUID().uuidString
     let imageUrl: String
 }

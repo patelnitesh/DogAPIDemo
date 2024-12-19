@@ -29,8 +29,8 @@ class DogBreedDetailsViewModelTests: XCTestCase {
 
     func testFetchBreedImagesSuccess() async {
         // Given
-        mockDogApiService.mockImages = [DogBreedImage(imageUrl: "https://example.com/image1.jpg"),
-                                        DogBreedImage(imageUrl: "https://example.com/image2.jpg")]
+        mockDogApiService.mockImages = [BreedImage(imageUrl: "https://example.com/image1.jpg"),
+                                        BreedImage(imageUrl: "https://example.com/image2.jpg")]
 
         // When
         await subject.fetchBreedImages()

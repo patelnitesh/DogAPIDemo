@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DogImageGridView: View {
-    let imageUrls: [DogBreedImage]
+    let imageUrls: [BreedImage]
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var currentImage: String = ""
     

@@ -9,7 +9,7 @@ import Observation
 import SwiftUI
 
 @Observable class DogBreedDetailsViewModel {
-    var breedImages: [DogBreedImage] = []
+    var breedImages: [BreedImage] = []
     let dogBreed: DogBreed
     let numberOfImagesToFetch: Int
     let dogAPIService: DogAPIServiceProtocol

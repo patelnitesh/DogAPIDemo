@@ -18,7 +18,7 @@
 		116CF5A62C76753300847982 /* DogBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5A52C76753300847982 /* DogBreed.swift */; };
 		116CF5A82C76755200847982 /* DogBreedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5A72C76755200847982 /* DogBreedResponse.swift */; };
 		116CF5AA2C76758F00847982 /* DogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5A92C76758F00847982 /* DogAPIService.swift */; };
-		116CF5AC2C7675BA00847982 /* DogBreedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AB2C7675BA00847982 /* DogBreedImage.swift */; };
+		116CF5AC2C7675BA00847982 /* BreedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AB2C7675BA00847982 /* BreedImage.swift */; };
 		116CF5AE2C76760F00847982 /* DogBreedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */; };
 		116CF5B02C76776B00847982 /* DogBreedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5AF2C76776B00847982 /* DogBreedListView.swift */; };
 		116CF5B22C76791900847982 /* DogBreedDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CF5B12C76791900847982 /* DogBreedDetailsView.swift */; };
@@ -66,7 +66,7 @@
 		116CF5A52C76753300847982 /* DogBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreed.swift; sourceTree = "<group>"; };
 		116CF5A72C76755200847982 /* DogBreedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedResponse.swift; sourceTree = "<group>"; };
 		116CF5A92C76758F00847982 /* DogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIService.swift; sourceTree = "<group>"; };
-		116CF5AB2C7675BA00847982 /* DogBreedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedImage.swift; sourceTree = "<group>"; };
+		116CF5AB2C7675BA00847982 /* BreedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedImage.swift; sourceTree = "<group>"; };
 		116CF5AD2C76760F00847982 /* DogBreedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListViewModel.swift; sourceTree = "<group>"; };
 		116CF5AF2C76776B00847982 /* DogBreedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedListView.swift; sourceTree = "<group>"; };
 		116CF5B12C76791900847982 /* DogBreedDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedDetailsView.swift; sourceTree = "<group>"; };
@@ -202,10 +202,10 @@
 		116CF5A22C7674C800847982 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				116CF5A52C76753300847982 /* DogBreed.swift */,
 				116CF5A72C76755200847982 /* DogBreedResponse.swift */,
-				116CF5AB2C7675BA00847982 /* DogBreedImage.swift */,
+				116CF5A52C76753300847982 /* DogBreed.swift */,
 				112A8F282D143E1F00FD54BC /* DogImageResponse.swift */,
+				116CF5AB2C7675BA00847982 /* BreedImage.swift */,
 				11BFAD7E2D144FBB000A08F9 /* DogResultState.swift */,
 			);
 			path = Model;
@@ -374,7 +374,7 @@
 				116CF5AA2C76758F00847982 /* DogAPIService.swift in Sources */,
 				11BFAD812D148A5E000A08F9 /* DogImageGridView.swift in Sources */,
 				116CF5AE2C76760F00847982 /* DogBreedListViewModel.swift in Sources */,
-				116CF5AC2C7675BA00847982 /* DogBreedImage.swift in Sources */,
+				116CF5AC2C7675BA00847982 /* BreedImage.swift in Sources */,
 				116CF5B42C767A9A00847982 /* DogBreedDetailsViewModel.swift in Sources */,
 				116CF5A42C76750600847982 /* DogAPIEndPoint.swift in Sources */,
 				116CF5A62C76753300847982 /* DogBreed.swift in Sources */,

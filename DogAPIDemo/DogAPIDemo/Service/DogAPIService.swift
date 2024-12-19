@@ -9,7 +9,7 @@ import Foundation
 
 protocol DogAPIServiceProtocol {
     func fetchDogBreeds() async throws -> DogBreedResponse
-    func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [DogBreedImage]
+    func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [BreedImage]
 }
 
 enum DogAPIError: Error {
@@ -41,7 +41,7 @@ class DogAPIService: DogAPIServiceProtocol {
         }
     }
     
-    func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [DogBreedImage] {
+    func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [BreedImage] {
         guard let url = DogAPIEndpoint.randomImages(breed: breed, count: count).url else {
             throw URLError(.badURL)
         }
@@ -55,7 +55,7 @@ class DogAPIService: DogAPIServiceProtocol {
         do {
             let imageResponse = try JSONDecoder().decode(DogImageResponse.self, from: data)
             print(imageResponse.message.count)
-            return imageResponse.message.map { DogBreedImage(imageUrl: $0) }
+            return imageResponse.message.map { BreedImage(imageUrl: $0) }
         } catch {
             throw DogAPIError.decodingError
         }
