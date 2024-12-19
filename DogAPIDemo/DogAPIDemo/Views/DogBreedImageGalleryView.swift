@@ -13,45 +13,63 @@ struct DogBreedImageGalleryView: View {
     let selectedImage: BreedImage
 
     var body: some View {
-        if breedImages.isEmpty {
-            VStack {
-                Image(systemName: "dog")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                    .foregroundColor(.gray)
-                Text("No images available")
-                    .foregroundColor(.secondary)
-                    .padding()
-            }
-        } else {
-            TabView(selection: $currentImage) {
-                ForEach(breedImages, id: \.self) { breedImage in
-                    AsyncImage(url: URL(string: breedImage.imageUrl)) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .id(breedImage.id)
-                    } placeholder: {
-                        ProgressView()
-                            .frame(width: 150, height: 150)
-                            .background(Color.gray.opacity(0.2))
-                    }
-                    .padding()
-                    .tag(breedImage.id)
-                }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    currentImage = selectedImage.id
-                }
-            }
-            .overlay(alignment: .bottom) {
-                ThumbnailScrollView(breedImages: breedImages, currentImage: $currentImage)
+        VStack {
+            galleryContent
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                currentImage = selectedImage.id
             }
         }
     }
+
+    @ViewBuilder
+    private var galleryContent: some View {
+        if breedImages.isEmpty {
+            emptyStateView
+        } else {
+            imageGalleryView
+        }
+    }
+
+    @ViewBuilder
+    private var emptyStateView: some View {
+        VStack {
+            Image(systemName: "dog")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+                .foregroundColor(.gray)
+            Text("No images available")
+                .foregroundColor(.secondary)
+                .padding()
+        }
+    }
+
+    @ViewBuilder
+    private var imageGalleryView: some View {
+        TabView(selection: $currentImage) {
+            ForEach(breedImages, id: \.self) { breedImage in
+                AsyncImage(url: URL(string: breedImage.imageUrl)) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .id(breedImage.id)
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 150, height: 150)
+                        .background(Color.gray.opacity(0.2))
+                }
+                .padding()
+                .tag(breedImage.id)
+            }
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .overlay(alignment: .bottom) {
+            ThumbnailScrollView(breedImages: breedImages, currentImage: $currentImage)
+        }
+    }
 }
+
 
 struct ThumbnailScrollView: View {
     let breedImages: [BreedImage]
