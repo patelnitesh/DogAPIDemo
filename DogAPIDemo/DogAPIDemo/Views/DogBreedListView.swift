@@ -16,13 +16,14 @@ struct DogBreedListView: View {
     @State var searchText: String = ""
     
     var body: some View {
-        if viewModel.isLoading {
+        switch viewModel.state {
+            case .loading:
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .padding()
-        } else if let error = viewModel.error {
+        case .failed(let error):
             Text("Handled Error, \(error.localizedDescription)")
-        } else {
+        case .success:
             NavigationStack {
                 List {
                     ForEach(viewModel.filteredBreeds) { breed in

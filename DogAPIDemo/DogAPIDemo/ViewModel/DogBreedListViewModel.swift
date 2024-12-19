@@ -12,8 +12,8 @@ import SwiftUI
     var dogBreeds: [DogBreed] = []
     var filteredBreeds: [DogBreed] = []
     
-    var isLoading = false
-    var error: Error?
+    var state: DogResultState = .loading
+    
     var searchText: String = "" {
            didSet {
                filterDogBreeds()
@@ -30,19 +30,22 @@ import SwiftUI
     }
     
     func fetchDogBreeds() async {
-        isLoading = true
+        state = .loading
         do {
             let response = try await dogAPIService.fetchDogBreeds()
             self.dogBreeds = response.message.map { breed, subBreeds in
                 DogBreed(breed: breed, subBreeds: subBreeds.sorted()) }
             .sorted(by: { $0.name < $1.name })
             self.filterDogBreeds()
+            self.state = .success
         } catch {
-            self.error = error
             self.dogBreeds = []
             self.filterDogBreeds()
+            guard let error = error as? DogAPIError else {
+                return
+            }
+            self.state = .failed(error)
         }
-        isLoading = false
     }
     
     func filterDogBreeds() {
@@ -65,3 +68,4 @@ import SwiftUI
     // TODO: show only sub breed which is search for. e.g.
     // e.g. "hr" should show Australian/shepherd only and ingore Australian/kelpie
 }
+

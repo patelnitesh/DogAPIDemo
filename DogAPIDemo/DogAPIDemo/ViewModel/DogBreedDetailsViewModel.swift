@@ -10,13 +10,11 @@ import SwiftUI
 
 @Observable class DogBreedDetailsViewModel {
     var breedImages: [DogBreedImage] = []
-    var isLoading = false
-    var error: Error?
-    
     let dogBreed: DogBreed
     let numberOfImagesToFetch: Int
     let dogAPIService: DogAPIServiceProtocol
     
+    var state: DogResultState = .loading
 
     init(dogBreed: DogBreed, numberOfImagesToFetch: Int = 10, dogAPIService: DogAPIServiceProtocol) {
         self.dogAPIService = dogAPIService
@@ -28,14 +26,18 @@ import SwiftUI
     }
     
     func fetchBreedImages() async {
-        isLoading = true
+        state = .loading
         do {
             breedImages = try await dogAPIService.fetchBreedImages(breed: dogBreed, count: numberOfImagesToFetch)
+            state = .success
         } catch {
-            self.error = error
             breedImages = []
+            guard let error = error as? DogAPIError else {
+                return
+            }
+            self.state = .failed(error)
+
         }
-        isLoading = false
     }
     
     var displayName: String {

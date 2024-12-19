@@ -20,20 +20,18 @@ struct DogBreedDetailsView: View {
     
     var body: some View {
         VStack {
-            if viewModel.isLoading {
+            switch viewModel.state {
+            case .loading:
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
-            } else if let error = viewModel.error {
-                Text("Error loading images: \(error.localizedDescription)")
-                    .foregroundColor(.red)
-                    .padding()
-            } else if viewModel.breedImages.isEmpty {
-                Text("No images available")
-                    .foregroundColor(.gray)
-                    .padding()
-            } else {
-                DogBreedImageGalleryView(breedImages: viewModel.breedImages, currentImage: $currentImage)
+            case .success:
+                VStack{
+                    Text("Images count \(viewModel.breedImages.count)")
+                    DogBreedImageGalleryView(breedImages: viewModel.breedImages, currentImage: $currentImage)
+                }
+            case .failed(let error):
+                Text("Handled Error, \(error.localizedDescription)")
             }
         }
         .navigationTitle(viewModel.displayName)
