@@ -39,15 +39,14 @@ import SwiftUI
             self.filterDogBreeds()
             self.state = .success
         } catch {
-            self.dogBreeds = []
-            self.filterDogBreeds()
+            self.dogBreeds = [] // Clear the breeds in case of an error
             guard let error = error as? DogAPIError else {
                 return
             }
             self.state = .failed(error)
         }
     }
-    
+
     func filterDogBreeds() {
         if !searchText.isEmpty {
             filteredBreeds = dogBreeds.filter { breed in

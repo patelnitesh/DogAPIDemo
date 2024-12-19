@@ -12,8 +12,7 @@ import SwiftUI
 ///
 struct DogBreedDetailsView: View {
     private var viewModel: DogBreedDetailsViewModel
-    @State private var currentImage: String = ""
-
+    
     init(dogBreed: DogBreed) {
         viewModel = DogBreedDetailsViewModel(dogBreed: dogBreed, dogAPIService: DogAPIService.shared)
     }
@@ -26,19 +25,17 @@ struct DogBreedDetailsView: View {
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
             case .success:
-                VStack{
-                    Text("Images count \(viewModel.breedImages.count)")
-                    DogBreedImageGalleryView(breedImages: viewModel.breedImages, currentImage: $currentImage)
-                }
+                DogImageGridView(imageUrls: viewModel.breedImages)
             case .failed(let error):
                 Text("Handled Error, \(error.localizedDescription)")
             }
         }
         .navigationTitle(viewModel.displayName)
-        
     }
 }
 
 #Preview {
     DogBreedDetailsView(dogBreed: DogBreed(breed: "airedale"))
 }
+
+

@@ -11,7 +11,8 @@ import SwiftUI
 struct DogAPIDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            DogBreedListView()
+            let dogBreedListViewModel = DogBreedListViewModel(dogAPIService: DogAPIService.shared)
+            DogBreedListView(viewModel: dogBreedListViewModel)
         }
     }
 }

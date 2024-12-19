@@ -11,13 +11,17 @@ import SwiftUI
 
 struct DogBreedListView: View {
     
-    private var viewModel = DogBreedListViewModel(dogAPIService: DogAPIService.shared)
+    private var viewModel: DogBreedListViewModel
+    
+    init(viewModel: DogBreedListViewModel) {
+        self.viewModel = viewModel
+    }
     
     @State var searchText: String = ""
     
     var body: some View {
         switch viewModel.state {
-            case .loading:
+        case .loading:
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .padding()
@@ -65,5 +69,6 @@ struct DogBreedListView: View {
 }
 
 #Preview {
-    DogBreedListView()
+    let vm = DogBreedListViewModel(dogAPIService: DogAPIService.shared)
+    DogBreedListView(viewModel: vm)
 }

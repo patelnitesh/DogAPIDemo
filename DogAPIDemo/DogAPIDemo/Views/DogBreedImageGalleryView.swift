@@ -10,8 +10,10 @@ import SwiftUI
 struct DogBreedImageGalleryView: View {
     var breedImages: [DogBreedImage]
     @Binding var currentImage: String
+    let selectedImage: DogBreedImage
     
     var body: some View {
+        
         TabView(selection: $currentImage) {
             ForEach(breedImages, id: \.self) { breedImage in
                 AsyncImage(url: URL(string: breedImage.imageUrl)) { image in
@@ -27,7 +29,7 @@ struct DogBreedImageGalleryView: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onAppear(){
-            currentImage = breedImages.first?.id ?? ""
+            currentImage = selectedImage.id
         }
         .overlay (alignment: .bottom) {
             ScrollViewReader { proxy in
