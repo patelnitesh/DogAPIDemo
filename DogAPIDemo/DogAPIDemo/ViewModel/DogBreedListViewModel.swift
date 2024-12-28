@@ -40,6 +40,7 @@ import SwiftUI
             self.state = .success
         } catch {
             self.dogBreeds = [] // Clear the breeds in case of an error
+            self.filteredBreeds = []
             guard let error = error as? DogAPIError else {
                 return
             }

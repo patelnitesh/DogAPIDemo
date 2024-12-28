@@ -9,25 +9,26 @@ import XCTest
 @testable import DogAPIDemo
 
 class MockDogAPIService: DogAPIServiceProtocol {
+    
     var fetchDogBreedsCalled = false
-    var fetchBreedImagesCalled = false
     var shouldReturnError = false
+    
+    var mockResponse: DogAPIDemo.DogBreedResponse = DogBreedResponse(
+        message: [
+            "Australian": ["shepherd", "kelpie"],
+            "Beagle": []
+        ],
+        status: "success"
+    )
+    
+    var fetchBreedImagesCalled = false
     var mockImages: [BreedImage] = []
-
-    func fetchDogBreeds() async throws -> DogBreedResponse {
+    
+    func fetchDogBreeds() async throws -> DogAPIDemo.DogBreedResponse {
         fetchDogBreedsCalled = true
-        
         if shouldReturnError {
-            // Simulate an error
-            throw URLError(.badServerResponse)
+            throw DogAPIError.decodingError
         }
-        
-        // Return a mock response
-        let mockResponse = DogBreedResponse(message: [
-            "labrador": ["golden"],
-            "bulldog": []
-        ], status: "success")
-        
         return mockResponse
     }
     
@@ -37,7 +38,7 @@ class MockDogAPIService: DogAPIServiceProtocol {
         
         if shouldReturnError {
             // Simulate an error
-            throw URLError(.badServerResponse)
+            throw DogAPIError.decodingError
         }
         
         let tempImages = [

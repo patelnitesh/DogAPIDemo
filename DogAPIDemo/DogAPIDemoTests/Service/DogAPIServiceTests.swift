@@ -27,8 +27,8 @@ class DogAPIServiceTests: XCTestCase {
             // Then
             XCTAssertTrue(mockService.fetchDogBreedsCalled, "fetchDogBreeds should be called.")
             XCTAssertEqual(response.message.count, 2, "There should be 2 breeds.")
-            XCTAssertEqual(response.message["labrador"]?.count, 1, "Labrador breed should have 1 sub-breed.")
-            XCTAssertEqual(response.message["bulldog"]?.count, 0, "Bulldog breed should have 0 sub-breeds.")
+            XCTAssertEqual(response.message["Australian"]?.count, 2, "Australian breed should have 2 sub-breed.")
+            XCTAssertEqual(response.message["Beagle"]?.count, 0, "Bulldog breed should have 0 sub-breeds.")
         } catch {
             XCTFail("Expected success but got error: \(error)")
         }

@@ -29,42 +29,33 @@ class DogBreedDetailsViewModelTests: XCTestCase {
 
     func testFetchBreedImagesSuccess() async {
         // Given
-        mockDogApiService.mockImages = [BreedImage(imageUrl: "https://example.com/image1.jpg"),
-                                        BreedImage(imageUrl: "https://example.com/image2.jpg")]
+        mockDogApiService.mockImages = [
+            BreedImage(imageUrl: "https://example.com/image1.jpg"),
+            BreedImage(imageUrl: "https://example.com/image2.jpg")
+        ]
 
         // When
         await subject.fetchBreedImages()
 
         // Then
         XCTAssertTrue(mockDogApiService.fetchBreedImagesCalled, "fetchBreedImages should be called.")
-        XCTAssertFalse(subject.isLoading, "isLoading should be false after fetching images.")
-        XCTAssertNil(subject.error, "Error should be nil on success.")
+        XCTAssertEqual(subject.state, .success, "State should be success after fetching images.")
         XCTAssertEqual(subject.breedImages.count, 2, "There should be 2 images fetched.")
     }
 
     func testFetchBreedImagesFailure() async {
         // Given
         mockDogApiService.shouldReturnError = true
-        
-        // Create an expectation
-        let expectation = XCTestExpectation(description: "fetchDogBreeds should handle errors.")
 
         // When
         await subject.fetchBreedImages()
 
         // Then
         XCTAssertTrue(mockDogApiService.fetchBreedImagesCalled, "fetchBreedImages should be called.")
-        XCTAssertFalse(subject.isLoading, "isLoading should be false after attempting to fetch images.")
-        XCTAssertNotNil(subject.error, "Error should be set when fetching images fails.")
+        XCTAssertEqual(subject.state, .failed(.decodingError), "State should reflect a decoding error.")
         XCTAssertTrue(subject.breedImages.isEmpty, "There should be no images when fetching fails.")
-        
-        // Fulfill the expectation
-        expectation.fulfill()
-        
-        // Wait for expectations
-        await fulfillment(of: [expectation], timeout: 5.0)
     }
-
+    
     func testDisplayName() {
         // Given
         let parentBreedName = "Retriever"
@@ -79,3 +70,4 @@ class DogBreedDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(displayName, "\(parentBreedName.capitalized) - \(mockDogBreed.displayName)", "Display name should be formatted as 'Retriever - Labrador'.")
     }
 }
+
