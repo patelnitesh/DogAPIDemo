@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DogAPIDemo
 
 class MockDogAPIService: DogAPIServiceProtocol {
@@ -48,5 +49,25 @@ class MockDogAPIService: DogAPIServiceProtocol {
         ]
         
         return mockImages.isEmpty ?  tempImages : mockImages
+    }
+    
+    func fetchBreedImagesWithCombine(breed: DogBreed, count: Int) -> AnyPublisher<[BreedImage], DogAPIError> {
+        fetchBreedImagesCalled = true
+        if shouldReturnError {
+            return Fail(error: DogAPIError.decodingError)
+                .eraseToAnyPublisher()
+        }
+        
+        let tempImages = [
+            BreedImage(imageUrl: "https://example.com/image1.jpg"),
+            BreedImage(imageUrl: "https://example.com/image2.jpg"),
+            BreedImage(imageUrl: "https://example.com/image3.jpg")
+        ]
+        
+        let images = mockImages.isEmpty ? tempImages : mockImages
+        
+        return Just(images)
+            .setFailureType(to: DogAPIError.self) // Ensures the same error type
+            .eraseToAnyPublisher()
     }
 }

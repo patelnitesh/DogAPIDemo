@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import Combine
+
 
 protocol DogAPIServiceProtocol {
     func fetchDogBreeds() async throws -> DogBreedResponse
     func fetchBreedImages(breed: DogBreed, count: Int) async throws -> [BreedImage]
+    func fetchBreedImagesWithCombine(breed: DogBreed, count: Int) -> AnyPublisher<[BreedImage], DogAPIError>
 }
 
 enum DogAPIError: Error {
@@ -59,5 +62,27 @@ class DogAPIService: DogAPIServiceProtocol {
         } catch {
             throw DogAPIError.decodingError
         }
+    }
+    
+    func fetchBreedImagesWithCombine(breed: DogBreed, count: Int) -> AnyPublisher<[BreedImage], DogAPIError> {
+        guard let url = DogAPIEndpoint.randomImages(breed: breed, count: count).url else {
+            return Fail(error: DogAPIError.invalidURL).eraseToAnyPublisher()
+        }
+        
+        print(url)
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { data, response -> Data in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw DogAPIError.invalidResponse
+                }
+                return data
+            }
+            .decode(type: DogImageResponse.self, decoder: JSONDecoder())
+            .map { $0.message.map { BreedImage(imageUrl: $0) } }
+            .mapError { error in
+                (error as? DogAPIError) ?? .decodingError
+            }
+            .eraseToAnyPublisher()
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DogAPIDemo
 
 class DogBreedDetailsViewModelTests: XCTestCase {
@@ -13,6 +14,8 @@ class DogBreedDetailsViewModelTests: XCTestCase {
     var subject: DogBreedDetailsViewModel!
     var mockDogApiService: MockDogAPIService!
     var mockDogBreed: DogBreed!
+    var cancellables: Set<AnyCancellable> = []
+
 
     override func setUp() {
         super.setUp()
@@ -24,6 +27,7 @@ class DogBreedDetailsViewModelTests: XCTestCase {
     override func tearDown() {
         mockDogApiService = nil
         subject = nil
+        cancellables.removeAll()
         super.tearDown()
     }
 
@@ -69,5 +73,66 @@ class DogBreedDetailsViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(displayName, "\(parentBreedName.capitalized) - \(mockDogBreed.displayName)", "Display name should be formatted as 'Retriever - Labrador'.")
     }
+    
+    
+    // Combine Tests
+    func testFetchBreedImagesWithCombine_Success() {
+        // Given
+        mockDogApiService.mockImages = [
+            BreedImage(imageUrl: "https://example.com/success1.jpg"),
+            BreedImage(imageUrl: "https://example.com/success2.jpg")
+        ]
+        
+        let expectation = XCTestExpectation(description: "Successfully fetch breed images using Combine")
+        
+        // When
+        mockDogApiService
+            .fetchBreedImagesWithCombine(breed: mockDogBreed, count: 2)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure:
+                    XCTFail("Expected success but got failure.")
+                    expectation.fulfill()
+                case .finished:
+                    expectation.fulfill()
+                }
+            }, receiveValue: { images in
+                // Then
+                XCTAssertEqual(images.count, 2, "Expected 2 images but got \(images.count).")
+                XCTAssertEqual(images.first?.imageUrl, "https://example.com/success1.jpg", "First image URL mismatch.")
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+    func testFetchBreedImagesWithCombine_Failure() {
+        // Given
+        mockDogApiService.shouldReturnError = true
+        
+        let expectation = XCTestExpectation(description: "Fail to fetch breed images using Combine")
+        
+        // When
+        mockDogApiService
+            .fetchBreedImagesWithCombine(breed: mockDogBreed, count: 2)
+            .receive(on: DispatchQueue.main)  // Ensure errors are handled on the main thread
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    // Then
+                    XCTAssertEqual(error, .decodingError, "Expected decoding error.")
+                    expectation.fulfill()
+                case .finished:
+                    XCTFail("Expected failure but got success.")
+                    expectation.fulfill()
+                }
+            }, receiveValue: { _ in
+                XCTFail("No value should be received on failure.")
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+
 }
 
