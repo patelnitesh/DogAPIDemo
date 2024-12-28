@@ -1,9 +1,8 @@
-
 # Dog API Demo
 
 ## Overview
 
-**Dog API Demo** is a Swift-based iOS application that provides users with information about different dog breeds. The app fetches breed data and images using the Dog CEO API. The application demonstrates key iOS development concepts such as MVVM architecture, Swift Concurrency with `async/await`, and unit testing using `XCTest`.
+**Dog API Demo** is a Swift-based iOS application that provides users with information about different dog breeds. The app fetches breed data and images using the Dog CEO API. The application demonstrates key iOS development concepts such as MVVM architecture, Swift Concurrency with `async/await`, Combine framework, and unit testing using `XCTest`.
 
 ## Features
 
@@ -52,6 +51,7 @@ This project does not currently use any external dependencies. All code is self-
 The image gallery displays pictures of the selected dog breed using a `TabView` with swipeable pages. Each page shows an image fetched from the Dog CEO API. The gallery includes:
 
 - **AsyncImage** for loading images asynchronously.
+- **Combine API** for downloading breed images with publishers and subscribers.
 - **TabView** with `PageTabViewStyle` for paging through images.
 - **Hidden tab dots** to keep the interface clean.
 
@@ -65,6 +65,16 @@ The app uses the [Dog CEO API](https://dog.ceo/dog-api/documentation/) to fetch 
 - **Random Images for a Breed**: `/breed/{breed}/{subBreed}/images/random/{count}`
 - **List Sub Breeds**: `/breed/{breed}/list`
 
+## Combine API for Image Downloads
+
+The app now uses the Combine framework to fetch breed images through a new API method:
+
+```swift
+func fetchBreedImagesWithCombine(breed: DogBreed, count: Int) -> AnyPublisher<[BreedImage], DogAPIError>
+```
+
+This approach allows for a more reactive and streamlined way to handle image fetching by subscribing to publishers and managing state with Combine pipelines.
+
 ## Unit Testing
 
 Unit tests are written using `XCTest` to ensure the correct behavior of the ViewModels and API services. Mock services are used to simulate API responses for testing purposes.
@@ -75,25 +85,38 @@ Unit tests are written using `XCTest` to ensure the correct behavior of the View
 2. Select the `DogAPIDemoTests` scheme.
 3. Press `Cmd+U` to run the tests.
 
-### Example Test
+### Example Test for Combine API
 
-An example of a unit test is included for the `DogBreedListViewModel`, which verifies that dog breeds are fetched correctly and that the search functionality works as expected.
+An example of a unit test is included for the Combine-based image fetch API to verify both success and failure cases:
 
 ```swift
-    func testFetchDogBreedsSuccess() async {
-        // When
-        await subject.fetchDogBreeds()
+func testFetchBreedImagesWithCombine_Success() {
+    let expectation = XCTestExpectation(description: "Successfully fetch breed images using Combine")
+    mockDogApiService.mockImages = [
+        BreedImage(imageUrl: "https://example.com/image1.jpg"),
+        BreedImage(imageUrl: "https://example.com/image2.jpg")
+    ]
 
-        // Then
-        XCTAssertTrue(mockDogApiService.fetchDogBreedsCalled, "fetchDogBreeds should be called.")
-        XCTAssertEqual(subject.dogBreeds.count, 2, "Expected 2 breeds, but got \(subject.dogBreeds.count).")
-        XCTAssertEqual(subject.filteredBreeds.count, 2, "Expected 2 Filterd breeds, but got \(subject.filteredBreeds.count).")
-    }
+    mockDogApiService.fetchBreedImagesWithCombine(breed: mockDogBreed, count: 2)
+        .sink(receiveCompletion: { completion in
+            switch completion {
+            case .failure:
+                XCTFail("Expected success but got failure.")
+            case .finished:
+                expectation.fulfill()
+            }
+        }, receiveValue: { images in
+            XCTAssertEqual(images.count, 2, "Expected 2 images but got \(images.count).")
+        })
+        .store(in: &cancellables)
+
+    wait(for: [expectation], timeout: 10.0)
+}
 ```
 
 ## Error Handling
 
-The app includes basic error handling for network requests, such as checking for a valid URL, handling invalid HTTP responses, and handling JSON decoding errors. Currenly Errors are displayed to the user via Text label only.
+The app includes basic error handling for network requests, such as checking for a valid URL, handling invalid HTTP responses, and handling JSON decoding errors. Errors are displayed to the user via a text label.
 
 ## Contributing
 
