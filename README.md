@@ -80,13 +80,15 @@ Unit tests are written using `XCTest` to ensure the correct behavior of the View
 An example of a unit test is included for the `DogBreedListViewModel`, which verifies that dog breeds are fetched correctly and that the search functionality works as expected.
 
 ```swift
-func testFetchDogBreedsSuccess() async {
-    await subject.fetchDogBreeds()
+    func testFetchDogBreedsSuccess() async {
+        // When
+        await subject.fetchDogBreeds()
 
-    XCTAssertTrue(mockDogApiService.fetchDogBreedsCalled, "fetchDogBreeds should be called.")
-    XCTAssertEqual(subject.dogBreeds.count, 2, "There should be 2 breeds.")
-    XCTAssertEqual(subject.filteredBreeds.count, 2, "There should be 2 breeds.")
-}
+        // Then
+        XCTAssertTrue(mockDogApiService.fetchDogBreedsCalled, "fetchDogBreeds should be called.")
+        XCTAssertEqual(subject.dogBreeds.count, 2, "Expected 2 breeds, but got \(subject.dogBreeds.count).")
+        XCTAssertEqual(subject.filteredBreeds.count, 2, "Expected 2 Filterd breeds, but got \(subject.filteredBreeds.count).")
+    }
 ```
 
 ## Error Handling
